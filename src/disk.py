@@ -28,7 +28,7 @@ def get_disk_usage_percent(path=None):
 
     disk = psutil.disk_usage(path)
     disk_usage = disk.percent
-    return f"{round(disk_usage)}%"
+    return f"{round(disk_usage):2d}%"
 
 
 def get_disk_usage_free(path=None):

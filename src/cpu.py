@@ -10,7 +10,7 @@ def get_cpu_usage(interval: int, percpu: bool) -> str:
     if percpu:
         percpu_str = ", ".join(str(round(v)) for v in cpu_usage)
         return percpu_str
-    return f"{round(cpu_usage)}%"
+    return f"{round(cpu_usage):2d}%"
 
 
 def main(args):

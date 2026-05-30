@@ -7,7 +7,7 @@ def get_mem_usage_percent():
     """Display memory usage as a percentage"""
     mem = psutil.virtual_memory()
     mem_usage = mem.percent
-    return f"{round(mem_usage)}%"
+    return f"{round(mem_usage):2d}%"
 
 
 def get_mem_usage_total():
