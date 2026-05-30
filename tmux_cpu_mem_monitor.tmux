@@ -10,9 +10,17 @@ check_python_installation() {
     fi
 }
 
+# Checks if the existing venv is usable (interpreter works and psutil imports)
+check_venv_health() {
+    local venv_python="$CURRENT_DIR/venv/bin/python"
+    local venv_pip="$CURRENT_DIR/venv/bin/pip"
+    [ -x "$venv_python" ] && [ -x "$venv_pip" ] && "$venv_python" -c "import psutil" >/dev/null 2>&1
+}
+
 # Sets up the virtual environment and install dependencies
 setup_virtual_env() {
-    if [ ! -d "$CURRENT_DIR/venv" ]; then
+    if [ ! -d "$CURRENT_DIR/venv" ] || ! check_venv_health; then
+        rm -rf "$CURRENT_DIR/venv"
         tmux display-message "tmux-cpu-memory: Setting up virtual environment..."
         if python3 -m venv "$CURRENT_DIR/venv"; then
             if "$CURRENT_DIR/venv/bin/pip" install -r "$CURRENT_DIR/requirements.txt"; then
