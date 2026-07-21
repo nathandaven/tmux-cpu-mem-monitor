@@ -16,7 +16,8 @@ def get_mem_usage_total():
     available_gb = mem.available / (1024**3)  # Convert to GB
     total_gb = mem.total / (1024**3)
     used_gb = total_gb - available_gb
-    return f"{used_gb:.2f}GB/{total_gb:.2f}GB"
+    # return f"{used_gb:.2f}GB/{total_gb:.2f}GB"
+    return f"{used_gb:.2f}/{total_gb:.0f}GB"
 
 
 def main(args):
